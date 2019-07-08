@@ -1,38 +1,34 @@
 class Phrase {
     constructor(phrase) {
-        this.phrase = phrase;
+        this.phrase = phrase.toLowerCase();
     }
+    //to create empty boxes for the chosen phrase
     addPhraseToDisplay() {
-        let contentHTMLFormat = `<ul>`;
-        for (let i = 0; i < this.phrase.length; i++) {
-            if (this.phrase[i] === " ") {
-                contentHTMLFormat += `<li class="hide space"> </li>`;
-            } else if (this.checkDuplication(this.phrase[i])) {
-                contentHTMLFormat += `<li class="hide letter ${this.phrase[i]}">${this.phrase[i]}</li>`;
+        for (let x = 0, c = ''; c = this.phrase.charAt(x); x++) {
+            if (this.phrase.charAt(x) === ' ') {
+                $('#phrase ul').append("<li class='hide space'</li>");
             } else {
-                contentHTMLFormat += `<li class="hide letter-multiple ${this.phrase[i]}">${this.phrase[i]}</li>`;
-            }
-        } contentHTMLFormat += `</ul>`;
-        const boxes = document.querySelector('#phrase ');
-        boxes.innerHTML = contentHTMLFormat;
-    }
-
-
-
-    checkLetter(letter) {
-        return this.phrase.includes(letter);
-    }
-    showMatchedLetter(letter) {
-        const allLetters = document.querySelectorAll('#phrase li');
-        for (let i = 0; i < allLetters.length; i++) {
-            if (allLetters[i].textContent === letter) {
-                allLetters[i].className += " show";
+                $('#phrase ul').append("<li class='hide letter'" + c + '>' + c + '</li>');
             }
         }
+    };
+    //checks to see if the letter selected is a letter within the phrase
+    checkLetter() {
+        let show = this;
+        $('#qwerty button').click(function () {
+            let letter = $('#phrase li')
+            for (let i = 0; i < letter.length; i++) {
+                if ($(this).text() === letter[i].innerHTML) {
+                    $(this).addClass('letters in phrase');
+                    letter[i].classList.add("rightLetter");
+                    show.showMatchedLetter();
+                }
+            }
+        })
+    };
+    //if the letter chosen does match one in the phrase, then the letter is shown
+    showMatchedLetter() {
+        $('.rightLetter').css('color', 'black');
     }
+};
 
-    checkDuplication(letter) {
-        let letters = this.phrase.split("");
-        return letters.indexOf(letter) === letters.lastIndexOf(letter);
-    }
-}
