@@ -13,3 +13,29 @@
         <li class="hide letter u">u</li>
     </ul>
 </div>
+
+class Game {
+    constructor() {
+        this.missed = 0;
+        this.phrases = [
+            new Phrase("Doris Longwing"),
+            new Phrase("Blue Morpho"),
+            new Phrase("Banded Peacock"),
+            new Phrase("Ceylon Rose"),
+            new Phrase("Island Marble"),
+            new Phrase("Luzon Giant Swallowtail"),
+            new Phrase("glasswinged butterfly"),
+            new Phrase("Jamaican Giant Swallowtail")];
+        this.activePhrase = null;
+    }
+
+    //randomly retrieves a phrase
+    getRandomPhrases() {
+        return this.phrases[Math.floor(Math.random() * this.phrases.length)];
+    }
+    // startGame(): calls the getRandomPhrase() method, and adds that phrase to the board by calling the Phrase class' addPhraseToDisplay() method.
+    startGame() {
+        this.missed = 0;
+        let randomPhrase = this.getRandomPhrases();
+        randomPhrase.addPhraseToDisplay(randomPhrase);
+    }
