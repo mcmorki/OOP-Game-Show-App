@@ -99,7 +99,7 @@ button {
   width: 65px;
   padding: 20px 1px 0 1px;
   margin-right: 2px;
-  color: red;
+  color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
 }
@@ -181,7 +181,9 @@ button {
 }
 
 .start {
-  background-color: #3a3f58;
+  background: linear-gradient(#ffa949, transparent 90%),
+              linear-gradient(0deg,#fff, transparent),
+              #ffa949 url('../images/purple%20butterfly.jpeg') no-repeat center;
 }
 
 .start a {

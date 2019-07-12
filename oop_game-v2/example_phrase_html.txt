@@ -39,3 +39,34 @@ class Game {
         let randomPhrase = this.getRandomPhrases();
         randomPhrase.addPhraseToDisplay(randomPhrase);
     }
+
+
+     removeLife() {
+        this.missed += 1;
+        if (this.missed !== 5) {
+            for (let i = 0; i < this.missed; i += 1) {
+                let live = $('.tries')[i];
+                let img = live.firstChild;
+                img.setAttribute('src', 'images/lostHeart.png');
+            }
+        } else {
+            this.gameOver();
+        }
+    }
+
+
+     gameOver() {
+        if (this.missed === 5) {
+            $('#game-over-message').text('You Lose!');
+            $('#overlay').show().css("background", "red");
+            $('#overlay').prop('className', 'lose');
+            $('#overlay').show();
+        } else {
+            $('#game-over-message').text('You win!');
+            $('#overlay').prop('className', 'lose');
+            $('#overlay').show().css("background", "yellow");
+        }
+
+
+    }
+}
