@@ -72,6 +72,9 @@ button {
   height: 100%;
   max-height: 900px;
   text-align: center;
+    background-image:
+        url("http://www.gsfdcy.com/data/img1/94/2248358-water-drops-wallpaper.jpg");
+       
 }
 
 .section {
@@ -174,6 +177,10 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+  background-image:
+        url("http://www.gsfdcy.com/data/img1/94/2248358-water-drops-wallpaper.jpg");
+
+ 
 }
 
 .title {
@@ -184,6 +191,7 @@ button {
   background: linear-gradient(#ffa949, transparent 90%),
               linear-gradient(0deg,#fff, transparent),
               #ffa949 url('../images/purple%20butterfly.jpeg') no-repeat center;
+              background-image: url("../images/WaterDrop.jpeg");
 }
 
 .start a {

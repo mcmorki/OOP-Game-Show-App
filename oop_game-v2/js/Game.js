@@ -70,13 +70,13 @@ class Game {
     * @param {boolean} gameWon - Whether or not the user won the game
     */
     gameOver(won) {
-        // if (this.missed === 5) {
-        //     $('#game-over-message').text(`You lost. '${this.activePhrase.phrase}'...`)
-        //     // overlay.className = "lose animate-pop-in";
-        // } else {
-        //     $('#game-over-message').text(`Winner! '${this.activePhrase.phrase}'...`)
-        //     // overlay.className = "win animate-pop-in";
-        // }
+        if (this.missed === 5) {
+            $('#game-over-message').text(`You lost. '${this.activePhrase.phrase}'...`)
+            overlay.className = "lose animate-pop-in";
+        } else {
+            $('#game-over-message').text(`Winner! '${this.activePhrase.phrase}'...`)
+            overlay.className = "win animate-pop-in";
+        }
         $('#btn__reset').text("Play Again")
         $('#overlay').fadeToggle()
         $("ul").html("")
@@ -93,22 +93,12 @@ class Game {
     }
 
     handleInteraction(event) {
-        // const keys = document.querySelectorAll(".key");
-        // keys.forEach(key => {
-        //     key.className = "key";
-        //     key.removeAttribute("disabled");
-        // })
-        // const lifeHearts = document.querySelectorAll(".tries img");
-        // lifeHearts.forEach(lifeHeart => {
-        //     lifeHeart.src = "images/liveHeart.png";
-        // })
-
-
-        if (event.target.className === "key") {
-            event.target.setAttribute("disabled", true);
+              if (event.target.className === "key") {
+            
 
             if (game.activePhrase.checkLetter(event.target.textContent) === false) {
                 event.target.className += " wrong";
+                event.target.setAttribute("disabled", true);
                 game.removeLife();
             } else {
                 event.target.className += " chosen";
