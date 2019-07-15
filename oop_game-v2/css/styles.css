@@ -73,8 +73,8 @@ button {
   max-height: 900px;
   text-align: center;
     background-image:
-        url("http://www.gsfdcy.com/data/img1/94/2248358-water-drops-wallpaper.jpg");
-       
+        url("http://www.cerc-ug.org/pic/b/18/188239_paint-brush-wallpaper.jpg");
+        background-size: 100%;
 }
 
 .section {
@@ -91,6 +91,7 @@ button {
 
 .header {
   color: #3a3f58;
+  font-style: oblique;
 }
 
 
@@ -178,9 +179,10 @@ button {
   right: 0;
   border-radius: 5px;
   background-image:
-        url("http://www.gsfdcy.com/data/img1/94/2248358-water-drops-wallpaper.jpg");
+        url("https://image.freepik.com/free-photo/water-color-palette-paintbrush-table-background-processed-with-snapseed_42299-202.jpg");
+        background-size: 100%;
 
- 
+        
 }
 
 .title {
@@ -188,10 +190,8 @@ button {
 }
 
 .start {
-  background: linear-gradient(#ffa949, transparent 90%),
-              linear-gradient(0deg,#fff, transparent),
-              #ffa949 url('../images/purple%20butterfly.jpeg') no-repeat center;
-              background-image: url("../images/WaterDrop.jpeg");
+  background: linear-gradient(#ffa949, 90%),
+           
 }
 
 .start a {

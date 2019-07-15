@@ -1,13 +1,3 @@
-// /**************************
-// Treehouse FSJS Techdegree
-// Project 4 - OOP Game App
-// app.js Comments
-// ***************************/
-
-
-
-
-
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
@@ -39,18 +29,43 @@
 // game.startGame();
 // console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 //  PASSED                Tested Code S T E P   8
-const game = new Game();
+let game;
 
-$("#btn__reset").on("click", () => {
+$('#btn__reset').on('click', () => {
+    resetDisplay();
+    game = new Game();
     game.startGame();
 });
 //  PASSED                Tested Code S T E P   9           **see Game.js for Step 9**
 
+/** PASSED                Tested Code S T E P   10
+* Handles onscreen keyboard button clicks
+* @param (HTMLButtonElement) button - The clicked button element
+*/
+// handleInteraction(button) {
+//     console.log(button);
+//     };
+// function used to reset the game from the beginning 
+function resetDisplay() {
+    $('#overlay').className = 'start';
+    overlay.style.display = 'none';
+    
+};
+function disableMe(button){
+    button.disabled = true;
+    game.handleInteraction(button);
+};
 
-$("#qwerty").on("click", game.handleInteraction);
+$('#qwerty').on('click', (event) => {
+    if (event.target.className === 'key') {
+        disableMe(event.target);
+    }
+});
 
- // Listening for "start game" button to be clicked
-
-// Listening for interactive keyboard to be clicked
-
-// Listening for physical keyboard to be pressed (For Exceeds only)
+$(document).on('keypress', (event) => {
+          for (let i = 0; i < $('#qwerty button').length; i++) {
+            if ($('#qwerty button')[i].textContent === event.key && $('#qwerty button')[i].disabled === false) {
+                disableMe($('#qwerty button')[i]);
+            }
+        }    
+});

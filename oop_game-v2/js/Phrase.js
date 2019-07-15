@@ -1,43 +1,38 @@
+
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase()
     }
-
     addPhraseToDisplay() {
-        const ul = document.getElementById("phrase").firstElementChild;
-
+        let contentHTMLFormat = `<ul>`;
         for (let i = 0; i < this.phrase.length; i++) {
-
-            const child = document.createElement('li');
-            ul.appendChild(child);
-            if (this.phrase.charAt(i) === ' ') {
-                child.className = 'space';
+            if (this.phrase[i] === " ") {
+                contentHTMLFormat += `<li class="hide space"></li>`;
             } else {
-                child.className = `hide letter ${this.phrase.charAt(i)}`;
-                child.innerText = this.phrase.charAt(i);
-                this.phraseLength++;
-            }
-        }
+                contentHTMLFormat += `<li class="hide letter ${this.phrase[i]}">${this.phrase[i]}</li>`;
+            } 
+        } contentHTMLFormat += `</ul>`;
+        const boxes = document.querySelector('#phrase ');
+        boxes.innerHTML = contentHTMLFormat;
     }
-    /*Adds letter placeholders for phrase to the display
-    @params {string} char - character input by user
-     */
-    checkLetter(letter) {
+    /**                 S T E P   9
+    * Checks if passed letter is in phrase
+    * @param (string) letter - Letter to check
+    */  
+        checkLetter(letter) {
         if (this.phrase.includes(letter)) {
             return true;
         } else {
             return false;
         }
     }
-    /*Displays matched letter if check letter returns match remove hidden class of letter
-   @params {string} char - character input by user
-     */
+    /**
+    * Displays passed letter on screen after a match is found
+    * @param (string) letter - Letter to display
+    */
     showMatchedLetter(letter) {
         $('#phrase ul .' + letter).removeClass("hide")
         $('#phrase ul .' + letter).addClass("show")
 
-    }
-
-}
-
+    }}
 
