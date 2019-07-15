@@ -178,9 +178,7 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
-  background-image:
-        url("https://image.freepik.com/free-photo/water-color-palette-paintbrush-table-background-processed-with-snapseed_42299-202.jpg");
-        background-size: 100%;
+ 
 
         
 }
@@ -190,7 +188,9 @@ button {
 }
 
 .start {
-  background: linear-gradient(#ffa949, 90%),
+   background-image:
+        url("https://image.freepik.com/free-photo/water-color-palette-paintbrush-table-background-processed-with-snapseed_42299-202.jpg");
+        background-size: 100%;
            
 }
 
@@ -199,7 +199,7 @@ button {
 }
 
 .win {
-  background-color: var(--color-win);
+  background-color: green;
 }
 
 .win a {

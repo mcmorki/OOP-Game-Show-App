@@ -13,18 +13,18 @@ class Game {
         this.missed = 0;
         this.activePhrase = null
         this.phrases = [
-        new Phrase("Mauve"),
-        new Phrase("Scarlett"),
-        new Phrase("Cerulean"),
-        new Phrase("Jade"),
-        new Phrase("Clementine"),
-        new Phrase("Mazarin"),
-        new Phrase("Xanthe"),
-        new Phrase("Melanie"),
-        new Phrase("Fuchsia"),
-        new Phrase("Viridian"),
-        new Phrase("Aurelia"),
-        new Phrase("Alba")]
+            new Phrase("Mauve"),
+            new Phrase("Scarlett"),
+            new Phrase("Cerulean"),
+            new Phrase("Jade"),
+            new Phrase("Clementine"),
+            new Phrase("Mazarin"),
+            new Phrase("Xanthe"),
+            new Phrase("Melanie"),
+            new Phrase("Fuchsia"),
+            new Phrase("Viridian"),
+            new Phrase("Aurelia"),
+            new Phrase("Alba")]
     }
     /**                 S T E P  5
     * Selects random phrase from phrases property
@@ -37,51 +37,49 @@ class Game {
     /**
     * Begins game by selecting a random phrase and displaying it to user
     */
-   startGame() {
-    this.activePhrase = this.getRandomPhrase();
-    this.activePhrase.addPhraseToDisplay();
-}
- /**                   S T E P   9
-    * Checks for winning move
-    * @return {boolean} True if game has been won, false if game wasn't
-    won
-    */
-   checkForWin() {
-    if ($('#phrase .show').length === $('#phrase .letter').length) {
-        this.gameOver();
+    startGame() {
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();
+        this.resetGame();
     }
-}
+    /**                   S T E P   9
+       * Checks for winning move
+       * @return {boolean} True if game has been won, false if game wasn't
+       won
+       */
+    checkForWin() {
+        if ($('#phrase .show').length === $('#phrase .letter').length) {
+            this.gameOver();
+        }
+    }
     /**
     * Increases the value of the missed property
     *  Removes a life from the scoreboard
          * Checks if player has remaining lives and ends game if player is out
     */
-   removeLife() {
-    $("img")[this.missed].src = "images/lostHeart.png";
-    this.missed += 1;
-    if (this.missed === 5) {
-        game.gameOver(false);
+    removeLife() {
+        $("img")[this.missed].src = "images/lostHeart.png";
+        this.missed += 1;
+        if (this.missed === 5) {
+            game.gameOver(false);
+        }
     }
-}
     /**
     * Displays game over message
     * @param {boolean} gameWon - Whether or not the user won the game
-    */
-   gameOver() {
-    overlay.style.display = '';
-    if (this.missed < 5) {
-        $('#game-over-message').text("You Win!")
-        $('#btn__reset').text("Play Again")
-        overlay.className = 'win';
-
-    } else {
-        $('#game-over-message').text("You Lose!")
-        $('#btn__reset').text("Try Again")
+    while diplaying a specific photo based off the lose of win */
+    gameOver(won) {
         $('#overlay').show()
+        $('#qwerty button').attr("disabled", true);
+        if (this.missed === 5) {
+            $('#game-over-message').text(`You lost! The answer was '${this.activePhrase.phrase}'`)
+            $('#overlay').css("background-image", "url(http://oysterbaytown.com/wp-content/uploads/painting-concept-with-brushes-and-colors_23-2147781603.jpg)");
+        } else {
+            $('#game-over-message').text(`Winner! You guessed correctly`)
+            $('#overlay').css("background-image", "url(https://image.freepik.com/free-photo/painting-concept-with-copyspace_23-2147781609.jpg)");
+        }
     }
-    this.resetGame();
-}
-
+    //checks whether a the letter selected is apart of the phrase displayed 
     handleInteraction(letter) {
 
         if (this.activePhrase.checkLetter(letter.textContent)) {
@@ -94,6 +92,7 @@ class Game {
             this.removeLife();
         }
     }
+    // resets the keyboard so all previous selected options are unselected
     resetGame() {
         this.missed = 0;
         let disabledButton = document.querySelectorAll('#qwerty button[disabled]');
@@ -104,7 +103,7 @@ class Game {
 
         document.querySelectorAll('#scoreboard img').forEach(item => { item.src = "images/liveHeart.png" });
     }
-   
+
 }
 
 

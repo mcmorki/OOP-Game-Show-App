@@ -45,27 +45,27 @@ $('#btn__reset').on('click', () => {
 // handleInteraction(button) {
 //     console.log(button);
 //     };
-// function used to reset the game from the beginning 
+// function used to reset display and hearts 
 function resetDisplay() {
     $('#overlay').className = 'start';
     overlay.style.display = 'none';
-    
+
 };
-function disableMe(button){
+function disableMe(button) {
     button.disabled = true;
     game.handleInteraction(button);
 };
-
+// when a letter is selected disables the user from selecting it again
 $('#qwerty').on('click', (event) => {
     if (event.target.className === 'key') {
         disableMe(event.target);
     }
 });
-
+// allows user to uses the keybord as another option 
 $(document).on('keypress', (event) => {
-          for (let i = 0; i < $('#qwerty button').length; i++) {
-            if ($('#qwerty button')[i].textContent === event.key && $('#qwerty button')[i].disabled === false) {
-                disableMe($('#qwerty button')[i]);
-            }
-        }    
-});
+    for (let i = 0; i < $('#qwerty button').length; i++) {
+        if ($('#qwerty button')[i].disabled === false && $('#qwerty button')[i].textContent === event.key) {
+            disableMe($('#qwerty button')[i]);
+        }
+    }
+}); 
