@@ -32,9 +32,10 @@
 let game;
 
 $('#btn__reset').on('click', () => {
-    resetDisplay();
+   
     game = new Game();
     game.startGame();
+    
 });
 //  PASSED                Tested Code S T E P   9           **see Game.js for Step 9**
 
@@ -46,26 +47,72 @@ $('#btn__reset').on('click', () => {
 //     console.log(button);
 //     };
 // function used to reset display and hearts 
-function resetDisplay() {
-    $('#overlay').className = 'start';
-    overlay.style.display = 'none';
+
+
+// function disableMe(button) {
+//     button.disabled = true;
+//     game.handleInteraction(button);
+// };
+
+let pressedKeys = [];
+const startBtn = document.getElementById('btn__reset');
+const keyboardBtns = document.getElementById('qwerty');
+
+const disableMe = (event) => {
+
+    game.handleInteraction(event);
 
 };
-function disableMe(button) {
-    button.disabled = true;
-    game.handleInteraction(button);
-};
 // when a letter is selected disables the user from selecting it again
-$('#qwerty').on('click', (event) => {
-    if (event.target.className === 'key') {
-        disableMe(event.target);
+$("#qwerty button").click((e) => {
+    game.handleInteraction($(e.target));
+  });
+  
+// allows user to uses the keybord as another option
+keyboardBtns.addEventListener('click', function(event) {
+    // If a button is clicked, call the markButton() function
+    if (event.target.tagName === 'BUTTON') {
+        event.target.disabled = true;
+
+        // Call the handleInteraction() method of the Game class
+        game.handleInteraction(event);
+
+    // If a key is pressed
+    } else if (event.type === 'keypress') {
+
+        // Disable the button on the onscreen keyboard
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => {
+            if (event.key === key.innerText) {
+                key.disabled = true;
+            }
+        });
     }
 });
-// allows user to uses the keybord as another option 
-$(document).on('keypress', (event) => {
-    for (let i = 0; i < $('#qwerty button').length; i++) {
-        if ($('#qwerty button')[i].disabled === false && $('#qwerty button')[i].textContent === event.key) {
-            disableMe($('#qwerty button')[i]);
-        }
+
+// When a key is pressed
+document.addEventListener('keypress', function(event) {
+    // Only accept letters
+    const filter = /[a-zA-Z]+/;
+    if (filter.test(event.key) && event.key !== 'Enter') {
+        event.target.disabled = true;
+
+        // Call the handleInteraction() method of the Game class
+        game.handleInteraction(event);
+
+    // If a key is pressed
+    } else if (event.type === 'keypress') {
+
+        // Disable the button on the onscreen keyboard
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => {
+            if (event.key === key.innerText) {
+                key.disabled = true;
+            }
+        });
     }
 }); 
+
+
+        // Disable the button on the onscreen keyboard
+       

@@ -37,20 +37,20 @@ class Game {
     /**
     * Begins game by selecting a random phrase and displaying it to user
     */
-    startGame() {
-        this.activePhrase = this.getRandomPhrase();
-        this.activePhrase.addPhraseToDisplay();
-        this.resetGame();
-    }
+   startGame() {
+    overlay.style.display = 'none';
+    this.activePhrase = this.getRandomPhrase();
+    this.activePhrase.addPhraseToDisplay();
+    this.resetGame();
+    
+}
     /**                   S T E P   9
        * Checks for winning move
        * @return {boolean} True if game has been won, false if game wasn't
        won
        */
     checkForWin() {
-        if ($('#phrase .show').length === $('#phrase .letter').length) {
-            this.gameOver();
-        }
+        return $('#phrase .show').length === $('#phrase .letter').length
     }
     /**
     * Increases the value of the missed property
@@ -80,18 +80,26 @@ class Game {
         }
     }
     //checks whether a the letter selected is apart of the phrase displayed 
-    handleInteraction(letter) {
+    handleInteraction(event) {
 
-        if (this.activePhrase.checkLetter(letter.textContent)) {
-            this.activePhrase.showMatchedLetter(letter.textContent);
-            letter.className += ' chosen';
+        // Returns true if the letter matches a letter in the phrase
+        
+
+        // If the selected letter matches
+        if (this.activePhrase.checkLetter(event)) {
+
+            // Call the showMatchedLetter() method on the phrase and then call the checkForWin() method
+            this.activePhrase.showMatchedLetter(event);
             this.checkForWin();
-        } else {
+            this.gameOver()
 
-            letter.className += ' wrong';
+        // Otherwise call the removeLife() method
+        } else {
             this.removeLife();
         }
     }
+    
+    
     // resets the keyboard so all previous selected options are unselected
     resetGame() {
         this.missed = 0;
