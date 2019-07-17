@@ -21,11 +21,7 @@ class Phrase {
     * @param (string) letter - 
     */
     checkLetter(letter) {
-        if (this.phrase.includes(letter)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (this.phrase.includes(letter))
     }
     /**
     * Displays passed letter on screen after a match is found

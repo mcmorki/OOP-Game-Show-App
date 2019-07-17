@@ -14,17 +14,18 @@ class Game {
         this.activePhrase = null
         this.phrases = [
             new Phrase("Mauve"),
+            new Phrase("Emerald"),
             new Phrase("Scarlett"),
-            new Phrase("Cerulean"),
+            new Phrase("Egg nog"),
             new Phrase("Jade"),
             new Phrase("Clementine"),
             new Phrase("Mazarin"),
             new Phrase("Xanthe"),
-            new Phrase("Melanie"),
+            new Phrase("Mars Black"),
             new Phrase("Fuchsia"),
-            new Phrase("Viridian"),
-            new Phrase("Aurelia"),
-            new Phrase("Alba")]
+            new Phrase("Eggplant"),
+            new Phrase("Titanium white"),
+            new Phrase("Phthalo blue")]
     }
     /**                 S T E P  5
     * Selects random phrase from phrases property
@@ -37,13 +38,13 @@ class Game {
     /**
     * Begins game by selecting a random phrase and displaying it to user
     */
-   startGame() {
-    overlay.style.display = 'none';
-    this.activePhrase = this.getRandomPhrase();
-    this.activePhrase.addPhraseToDisplay();
-    this.resetGame();
-    
-}
+    startGame() {
+        overlay.style.display = 'none';
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();
+        this.resetGame();
+
+    }
     /**                   S T E P   9
        * Checks for winning move
        * @return {boolean} True if game has been won, false if game wasn't
@@ -81,25 +82,22 @@ class Game {
     }
     //checks whether a the letter selected is apart of the phrase displayed 
     handleInteraction(event) {
-
+        $(event.target).prop('disabled', true)
         // Returns true if the letter matches a letter in the phrase
-        
 
         // If the selected letter matches
-        if (this.activePhrase.checkLetter(event)) {
-
+        if (this.activePhrase.checkLetter($(event.target).text())) {
             // Call the showMatchedLetter() method on the phrase and then call the checkForWin() method
-            this.activePhrase.showMatchedLetter(event);
-            this.checkForWin();
-            this.gameOver()
-
-        // Otherwise call the removeLife() method
+            this.activePhrase.showMatchedLetter($(event.target).text());
+            $(event.target).addClass('chosen')
+            if (this.checkForWin()) {
+                this.gameOver()
+            }
         } else {
+            $(event.target).addClass('wrong')
             this.removeLife();
         }
     }
-    
-    
     // resets the keyboard so all previous selected options are unselected
     resetGame() {
         this.missed = 0;
@@ -108,10 +106,8 @@ class Game {
             $('#qwerty button').attr("disabled", false);
             disabledButton[i].className = 'key';
         }
-
         document.querySelectorAll('#scoreboard img').forEach(item => { item.src = "images/liveHeart.png" });
     }
-
 }
 
 
